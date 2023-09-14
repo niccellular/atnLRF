@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">ATN Ballistic 1000/1500</string>
+    <!-- description -->
+    <string name="app_desc">A plugin to support the ATN Ballistic 1000/1500</string>
+
+
+
+
+</resources>
