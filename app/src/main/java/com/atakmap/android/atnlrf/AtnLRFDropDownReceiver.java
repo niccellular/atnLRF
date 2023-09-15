@@ -59,7 +59,6 @@ public class AtnLRFDropDownReceiver extends DropDownReceiver implements
     private MapView mapView;
     private final Context pluginContext;
     private Button connect;
-    private TextView heartRateTV, name;
     private BluetoothGatt mBluetoothGatt;
     private BluetoothGattCharacteristic mBluetoothGattCharacteristic;
     public final BluetoothGattCallback mGattCallback;
@@ -119,20 +118,24 @@ public class AtnLRFDropDownReceiver extends DropDownReceiver implements
                 Log.d(TAG, "onConnectionStateChange newState: " + arg7);
                 if(arg7 == 0) {
                     Log.i(TAG, "Disconnected from GATT server.");
-                    AtnLRFLifecycle.getActivity().runOnUiThread(() -> {
+                    /*
+                    mapView.getContext().getApplicationContext().runOnUiThread(() -> {
                         connect.setBackgroundResource(R.color.red);
                         connect.setText("*NOT* Connected");
                         connect.setVisibility(View.VISIBLE);
                     });
+
+                     */
                 }
 
                 if(arg7 == 2) {
+/*
                     AtnLRFLifecycle.getActivity().runOnUiThread(() -> {
                         connect.setBackgroundResource(R.color.green);
                         connect.setText("Connected");
                         connect.setVisibility(View.VISIBLE);
                     });
-
+*/
                     mBluetoothGatt.discoverServices();
                 }
 
