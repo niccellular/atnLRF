@@ -2,6 +2,7 @@
 package com.atakmap.android.atnlrf;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -69,6 +70,8 @@ public class AtnLRFDropDownReceiver extends DropDownReceiver implements
     public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
     public static String ATN_LRF_MEASUREMENT = "0000ffe1-0000-1000-8000-00805f9b34fb";
 
+    private Activity activity;
+
     /**************************** CONSTRUCTOR *****************************/
 
     public AtnLRFDropDownReceiver(final MapView mapView,
@@ -76,6 +79,7 @@ public class AtnLRFDropDownReceiver extends DropDownReceiver implements
         super(mapView);
         this.pluginContext = context;
         this.mapView = mapView;
+        this.activity = (Activity) mapView.getContext().getApplicationContext();
 
         // Remember to use the PluginLayoutInflator if you are actually inflating a custom view
         // In this case, using it is not necessary - but I am putting it here to remind
@@ -118,24 +122,24 @@ public class AtnLRFDropDownReceiver extends DropDownReceiver implements
                 Log.d(TAG, "onConnectionStateChange newState: " + arg7);
                 if(arg7 == 0) {
                     Log.i(TAG, "Disconnected from GATT server.");
-                    /*
-                    mapView.getContext().getApplicationContext().runOnUiThread(() -> {
+
+                    activity.runOnUiThread(() -> {
                         connect.setBackgroundResource(R.color.red);
                         connect.setText("*NOT* Connected");
                         connect.setVisibility(View.VISIBLE);
                     });
 
-                     */
+
                 }
 
                 if(arg7 == 2) {
-/*
-                    AtnLRFLifecycle.getActivity().runOnUiThread(() -> {
+
+                    activity.runOnUiThread(() -> {
                         connect.setBackgroundResource(R.color.green);
                         connect.setText("Connected");
                         connect.setVisibility(View.VISIBLE);
                     });
-*/
+
                     mBluetoothGatt.discoverServices();
                 }
 
